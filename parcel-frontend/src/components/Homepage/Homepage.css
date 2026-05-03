@@ -1,0 +1,90 @@
+/* ===== MAIN LAYOUT ===== */
+.homepage {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 60px 40px;
+  min-height: 80vh;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* ===== LEFT SIDE ===== */
+.homepage-left {
+  flex: 1;
+}
+
+/* ===== RIGHT SIDE ===== */
+.homepage-right {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* ===== TYPING TEXT ===== */
+.typing-text {
+  font-weight: 600;
+  font-size: 64px; /* reduced from 100px */
+  color: white;
+  line-height: 1.2;
+  white-space: nowrap; /* desktop only */
+}
+
+/* Cursor */
+.cursor {
+  display: inline-block;
+  margin-left: 2px;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* ===== TRACKER BOX ===== */
+.tracker-box {
+  width: 400px;
+  max-width: 100%;
+  height: 300px;
+  background: white;
+  border-radius: 20px;
+  padding: 30px;
+
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  border: 1px solid rgba(255, 255, 255, 0.2);
+
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.tracker-box h1 {
+  margin: 0;
+  font-size: 24px;
+}
+
+/* ===== MOBILE RESPONSIVE ===== */
+@media (max-width: 768px) {
+  
+  .homepage {
+    flex-direction: column;
+    text-align: center;
+    padding: 40px 20px;
+  }
+
+  .homepage-right {
+    justify-content: center;
+    margin-top: 30px;
+  }
+
+  .typing-text {
+    font-size: 36px;
+    white-space:normal;
+  }
+
+  .tracker-box {
+    width:300px;
+  }
+}
