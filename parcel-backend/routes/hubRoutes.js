@@ -1,13 +1,11 @@
 import { Router } from "express";
-import { addHub,
-         modifyHub,
-         deleteHub
-        } from "../controllers/hubControllers.js";
+import { addHub, modifyHub, deleteHub } from "../controllers/hubControllers.js";
+import { authMiddleware } from "../middlewares/authMiddleware.js";
 
 const hubRoutes = Router();
 
-hubRoutes.post("/add-hub",addHub);
-hubRoutes.patch("/modify-hub", modifyHub);
-hubRoutes.delete("/delete-hub/:id",deleteHub);
+hubRoutes.post("/add-hub",authMiddleware, addHub);
+hubRoutes.patch("/modify-hub",authMiddleware, modifyHub);
+hubRoutes.delete("/delete-hub/:id",authMiddleware, deleteHub);
 
 export default hubRoutes;
