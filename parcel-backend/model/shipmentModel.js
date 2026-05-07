@@ -13,7 +13,7 @@ const shimpmentModel = new mongoose.Schema({
         type:String,
         required:true
     },
-    hubList:{
+    log:{
         type:[String],
         required: true
     }
