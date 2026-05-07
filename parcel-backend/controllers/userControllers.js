@@ -59,7 +59,7 @@ export async function registerCoreTeam(req,res){
                                          email, 
                                          password:password_hash,
                                          hub,
-                                         userCategory:"hub-team"                                        
+                                         userCategory:"core-team"                                        
                                         });
         return res.status(201).json({
             success: true,
@@ -143,7 +143,7 @@ export async function registerHubOwner(req,res){
 
 
 // Function to register HubWorker. 
-export async function registerHubWroker(req,res){
+export async function registerHubWoker(req,res){
     const { name, email, password,hub } = req.body;
 
     // Checking the input fields.
@@ -198,4 +198,93 @@ export async function registerHubWroker(req,res){
         });
     }
 
+}
+
+
+// Function to modify user details.
+export async function modifyUser(req, res) {
+    const { name, password, newPassword, id } = req.body;
+    try {
+        if(!id){
+            return res.status(400).json({
+                success:false,
+                message:"User id not provided"
+            })
+        }
+
+        const user = await User.findById(id);
+
+        if(!user){
+               return res.status(404).json({
+                   success:false,
+                   message: "User not found"
+               })
+        }
+
+        if(name){
+            user.name = name;
+        }
+
+        if(password ){
+            if(!newPassword){
+                return res.status(400).json({
+                   success:false,
+                   message: "Incomeplete Details sent"
+               })
+            }
+
+            const matched = await bcrypt.compare( password, user.password);
+            if ( !matched ){
+                return res.status(401).json({
+                    success:false,
+                    message:"Wrong Password"
+                })
+            }
+
+            const password_hash = await bcrypt.hash(newPassword,10);
+            user.password = password_hash;          
+        }
+        await user.save();
+
+        return res.status(200).json({
+                   success: true,
+                   message: "User details updated successfully."
+               })
+
+    }catch(error){
+        console.error("Error is:",error);
+        return res.status(500).json({
+            success: false,
+            message:" Internal Sever Error"
+        })
+    }
+
+
+}
+
+// Function to delete user.
+export async function deleteUser(req, res ) {
+    try{
+        const { email } = req.body;
+        const deleted = await User.findOneAndDelete({
+            email: email
+        })
+
+        if(!deleted){
+            return res.status(404).json({
+                success: false,
+                message: "User not found"
+            })
+        }
+
+        return res.status(200).json({
+            success: true,
+            message:"User deleted successfully"
+        })
+    }catch(error){
+        return res.status(500).json({
+            success: false,
+            message:"Internal Server Error"
+        })
+    }
 }

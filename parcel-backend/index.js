@@ -17,9 +17,11 @@ import ConnectDatabase from "./services/Database.js"
 // Routers
 import authRoutes from "./routes/authRoutes.js";
 import userRouter from "./routes/userRoutes.js";
+import shipmentRoute from "./routes/shipmentRoutes.js"
+import hubRoutes from "./routes/hubRoutes.js";
 
 const app = express();
-const port=4000;
+const port = 4000;
 
 // Initializing middleware
 app.use(cors());
@@ -34,6 +36,8 @@ ConnectDatabase();
 // Routers
 app.use("/api/auth",authRoutes);
 app.use("/api/user",userRouter);
+app.use("/api/shipment",shipmentRoute);
+app.use("/api/hub",hubRoutes)
 
 app.get('/',(req,res)=>{
     res.send("API working ");

@@ -1,6 +1,7 @@
-import User from "../model/userModel.js";
 import jwt from "jsonwebtoken";
+import bcrypt from "bcryptjs";
 import { JWT_SECRET,TOKEN_EXPIRES } from "../commonData.js";
+import User from "../model/userModel.js"
 
 
 // Function to check user and send JWT token.
@@ -21,6 +22,15 @@ export async function login(req,res) {
                 message:"User not found"
             })
         }
+
+        const matched = await bcrypt.compare( password, user.password);
+        if ( !matched ){
+            return res.status(401).json({
+                success:false,
+                message:"Wrong Password"
+            })
+        }
+
         const token = jwt.sign(  { id : user._id }, 
                                  JWT_SECRET,
                                  { expiresIn: TOKEN_EXPIRES })
