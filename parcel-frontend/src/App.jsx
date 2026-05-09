@@ -7,7 +7,8 @@ import './App.css'
 import Header from './components/Header/Header'
 import Homepage from './components/Homepage/Homepage'
 import AboutUs from './components/AboutUs/AboutUs'
-import TrackPage from './components/TrackPage/TrackPage'
+import TrackingPage from './components/TrackingPage/TrackingPage'
+import UserVerificationPage from './components/UserVerificationPage/UserVerificationPage'
 
 function App() {
   return (
@@ -15,8 +16,9 @@ function App() {
       <Header />
       <Routes>
           <Route path='/' element={<Homepage/>} />
-          <Route path='/track' element={<TrackPage />} />
+          <Route path='/tracking' element={<TrackingPage />} />
           <Route path='/aboutus' element={<AboutUs />} />
+          <Route path='/user-verification/:trackingId' element={<UserVerificationPage />} />
       </Routes>
       
     </div>

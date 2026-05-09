@@ -21,14 +21,7 @@ function HeaderLinks() {
         About us
       </NavLink>
 
-      <NavLink
-        to="/track"
-        className={({ isActive }) =>
-          isActive ? "header-link active" : "header-link"
-        }
-      >
-        Track
-      </NavLink>
+      
     </div>
   );
 }

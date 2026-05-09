@@ -1,10 +1,24 @@
+import axios from "axios";
 import Shipment from "../model/shipmentModel.js";
-
+import { RECAPTCHA_SECRET_KEY } from "../commonData.js";
 
 // Get the shipment by id route for costomer to search their shipment.
 export async function getShipmentById(req, res) {
     try {
-        const shipment = await Shipment.findById(req.params.id);
+
+        const captchaValue= req.query.captchaValue;
+  
+        const verifyUrl = `https://www.google.com/recaptcha/api/siteverify?secret=${RECAPTCHA_SECRET_KEY}&response=${captchaValue}`
+       
+        const response = await axios.post(verifyUrl);
+        if (!response.data.success){
+            return res.status(400).json({
+                success:false,
+                message:"Captcha verfication falied"
+            })
+        }
+
+        const shipment = await Shipment.findById(req.query.id);
 
         if (!shipment) {
             return res.status(404).json({
@@ -66,7 +80,8 @@ export async function addShipment( req, res ) {
                         })
         return res.status(201).json({
             success:true,
-            message:"Shipment created successfully"
+            message:"Shipment created successfully",
+            shipment:shipment
         })
         
     }catch(error){

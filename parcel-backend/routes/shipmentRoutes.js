@@ -12,7 +12,7 @@ import { getShipmentById,
 
 const shipmentRoute = Router();
 
-shipmentRoute.get("/get-shipment/:id",authMiddleware,getShipmentById);
+shipmentRoute.get("/get-shipment",getShipmentById);
 shipmentRoute.get("/get-shipments/:hub",authMiddleware,getShipments);
 
 shipmentRoute.post("/add-shipment",authMiddleware,addShipment);
