@@ -9,6 +9,7 @@ import Homepage from './components/Homepage/Homepage'
 import AboutUs from './components/AboutUs/AboutUs'
 import TrackingPage from './components/TrackingPage/TrackingPage'
 import UserVerificationPage from './components/UserVerificationPage/UserVerificationPage'
+import LoginPage from './components/LoginPage/LoginPage'
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path='/tracking' element={<TrackingPage />} />
           <Route path='/aboutus' element={<AboutUs />} />
           <Route path='/user-verification/:trackingId' element={<UserVerificationPage />} />
+          <Route path ='/login' element={<LoginPage />} /> 
       </Routes>
       
     </div>
