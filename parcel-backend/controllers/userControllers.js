@@ -18,6 +18,44 @@ import User from '../model/userModel.js';
 import validator from 'validator';
 import bcrypt from 'bcryptjs';
 
+import jwt from "jsonwebtoken";
+import { JWT_SECRET } from "../commonData.js";
+
+// Function to fetch the user
+export async function getUser( req, res ){
+    const authHeader = req.headers.authorization;
+    try{
+        if(!authHeader){
+            return res.status(401).json({
+                message:"Token Missing"
+            })
+        }
+        let token; 
+        if(authHeader.startsWith("Bearer ")){
+            token = authHeader.split(" ")[1];
+        }else{
+            token = authHeader;
+        }
+        // to verify token        
+        const decoded = jwt.verify(token, JWT_SECRET);
+        const user = await User.findById(decoded.id);
+        console.log("user is ",user.email,"",user.name,"",user.hub,"user category",user.userCategory);
+        
+        return res.status(200).json({
+            success:true,
+            message:"User fetched successfully",
+            user
+        })
+
+    }catch(error){
+        console.error("error is ",error);
+        return res.status(500).json({
+            success:false,
+            message:"Internal Sever Error"
+        })
+    }
+}
+
 // Function to register core-team. 
 export async function registerCoreTeam(req,res){
     const { name, email, password,hub } = req.body;

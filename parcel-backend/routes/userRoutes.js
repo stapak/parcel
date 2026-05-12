@@ -1,5 +1,6 @@
 import { Router } from "express";
-import { registerCoreTeam, 
+import { getUser,
+         registerCoreTeam, 
          registerHubOwner, 
          registerHubWoker,
          deleteUser, 
@@ -7,6 +8,8 @@ import { registerCoreTeam,
         } from "../controllers/userControllers.js";
 import { authMiddleware } from '../middlewares/authMiddleware.js';
 const userRouter = Router();
+
+userRouter.post('/get-user',authMiddleware,getUser);
 
 // Routes to register users.
 userRouter.post('/register/core-team',authMiddleware,registerCoreTeam);
