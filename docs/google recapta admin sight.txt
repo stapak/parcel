@@ -1,0 +1,6 @@
+https://www.google.com/recaptcha/admin/site/752944296/setup
+
+copy site : 6LcPB-EsAAAAAGV8R6uWQc5qHyKdBYk5nk2Il5FD
+secret site: 6LcPB-EsAAAAAJWjh9SE2Wn8mOIG8HNZ0hgaoQXG
+
+http://localhost:5173/user-verification/69ff0c43043f50569e6d24c4
