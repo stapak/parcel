@@ -10,7 +10,7 @@ import AboutUs from './components/AboutUs/AboutUs';
 import TrackingPage from './components/TrackingPage/TrackingPage';
 import UserVerificationPage from './components/UserVerificationPage/UserVerificationPage';
 import LoginPage from './components/LoginPage/LoginPage';
-import DashboardPage from './components/DashboardPage/DashboardPage';
+import DashboardPage from './pages/DashboardPage';
 
 function App() {
   return (

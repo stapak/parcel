@@ -42,7 +42,7 @@ export async function getShipmentById(req, res) {
 
 
 // get the shipment using current hub.
-export async function getShipments( req, res ) {
+export async function getShipmentsByHub( req, res ) {
     try{
         const hub = req.params.hub
         const shipments = await Shipment.find({
@@ -194,5 +194,27 @@ export async function deleteShipment( req, res ) {
             success: false,
             message:"Internal server error."
         })
+    }
+}
+
+
+// to get all the shipments without any condition for sudo and core team.
+export async function getAllShipments( req, res ) {
+    try{
+        
+        const shipments = await Shipment.find();
+
+        return res.status(200).json({
+            success: true,
+            message:"Fetched the data successfully",
+            shipments:shipments
+        })
+    } catch (error) {
+        console.log("error is ", error);
+        return res.status(500).json({
+            success: false,
+            message:"Internal server error"
+        })
+
     }
 }

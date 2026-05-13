@@ -4,7 +4,7 @@ export default function DeliveryList({ deliveries }){
     return(
         <div className="shipment-section">
 
-        <h2>delivery Deliveries</h2>
+        <h2>Mark Deliveries</h2>
 
         <div className="shipment-grid">
 

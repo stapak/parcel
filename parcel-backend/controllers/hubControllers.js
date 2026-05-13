@@ -115,3 +115,24 @@ export async function deleteHub( req, res ) {
     }
     
 }
+
+// to get all the shipments without any condition for sudo and core team.
+export async function getAllHubs( req, res ) {
+    try{
+        
+        const hubs = await Hub.find();
+
+        return res.status(200).json({
+            success: true,
+            message:"Fetched the data successfully",
+            hubs
+        })
+    } catch (error) {
+        console.log("error is ", error);
+        return res.status(500).json({
+            success: false,
+            message:"Internal server error"
+        })
+
+    }
+}

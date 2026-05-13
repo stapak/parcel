@@ -93,6 +93,7 @@ export async function registerCoreTeam(req,res){
         }
 
         const password_hash = await bcrypt.hash(password,10);
+        console.log("password hash",password_hash);
         const user = await User.create({ name, 
                                          email, 
                                          password:password_hash,
@@ -324,5 +325,27 @@ export async function deleteUser(req, res ) {
             success: false,
             message:"Internal Server Error"
         })
+    }
+}
+
+
+// to get all the shipments without any condition for sudo and core team.
+export async function getAllUsers( req, res ) {
+    try{
+        
+        const users = await User.find();
+
+        return res.status(200).json({
+            success: true,
+            message:"Fetched the data successfully",
+            users
+        })
+    } catch (error) {
+        console.log("error is ", error);
+        return res.status(500).json({
+            success: false,
+            message:"Internal server error"
+        })
+
     }
 }

@@ -4,10 +4,10 @@ import { JWT_SECRET } from "../commonData.js";
 
 export function authMiddleware(req, res, next) {
     try{
-        const authHeader = req.headers.authorization;
-
-        if(!authHeader){
+        const authHeader = req.headers.authorization; 
+        if(!authHeader){    
             return res.status(401).json({
+                
                 message:"Token Missing"
             })
         }
@@ -24,9 +24,10 @@ export function authMiddleware(req, res, next) {
         try{
         const decoded = jwt.verify(token, JWT_SECRET);
         }catch(error){
+    
             return res.status(401).json({
                 success:false,
-                message:"Invalid token, user unauthorized"
+                message:"Invalid token, user unauthorized, by auth middle ware"
             })
         }
 
